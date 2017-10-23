@@ -11,4 +11,4 @@ while True:
   print "Receiving from server: " + str(data)
   message = raw_input("--->")
   
-  s.close()
+s.close()

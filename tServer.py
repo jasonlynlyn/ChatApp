@@ -13,5 +13,5 @@ while True:
   print "Receiving data from: " + str(data)
   connection.send(data)
   
-  connection.close()
+connection.close()
   

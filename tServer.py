@@ -1,17 +1,20 @@
 import socket
+import handlers as h
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+h.installSignalHandler(lambda: sock.close())
+
 server_address = ('localhost', 50000)
-
-s.bind(server_address)
-s.listen(1)
-connection, address = s.accept()
-print "Connection from: " + str(address)
+sock.bind(server_address)
+sock.listen(1)
+conn, address = sock.accept()
+print 'Connection from: ' + str(address)
 
 while True:
-  data = s.recv(1024)
-  print "Receiving data from: " + str(data)
-  connection.send(data)
-  
-connection.close()
-  
+    data = conn.recv(1024)
+    if not data: break
+    print 'Receiving data from: ' + str(data)
+    conn.send(data)
+
+sock.close()
